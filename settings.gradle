@@ -1,0 +1,3 @@
+rootProject.name='UIEnergyManagement'
+include ':app'
+include ':hierarchy-checker'
