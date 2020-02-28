@@ -22,15 +22,26 @@ public class HierarchyChecker {
           public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
              if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 android.app.FragmentManager def = activity.getFragmentManager();
-                def.registerFragmentLifecycleCallbacks(new android.app.FragmentManager.FragmentLifecycleCallbacks() {
+                 //noinspection deprecation
+                 def.registerFragmentLifecycleCallbacks(new android.app.FragmentManager.FragmentLifecycleCallbacks() {
+                    @Override
+                    public void onFragmentViewCreated(android.app.FragmentManager fm, android.app.Fragment f, View v, Bundle savedInstanceState) {
+                       analyzeHierarchy(v);
+                    }
                 }, true);
                 Log.d(LOG_TAG, "Simple FragmentManager's FragmentLifecycleCallbacks registered");
              } else {
                 Log.w(LOG_TAG, "Simple FragmentManager not supporting FragmentLifecycleCallbacks until Android O");
              }
+
+
              if (activity instanceof FragmentActivity) {
                 androidx.fragment.app.FragmentManager support = ((FragmentActivity) activity).getSupportFragmentManager();
                 support.registerFragmentLifecycleCallbacks(new androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks() {
+                   @Override
+                   public void onFragmentViewCreated(@NonNull androidx.fragment.app.FragmentManager fm, @NonNull androidx.fragment.app.Fragment f, @NonNull View v, @Nullable Bundle savedInstanceState) {
+                      analyzeHierarchy(v);
+                   }
                 }, true);
                 Log.d(LOG_TAG, "SupportFragmentManager's FragmentLifecycleCallbacks registered");
              } else {
@@ -43,7 +54,8 @@ public class HierarchyChecker {
 
           @Override
           public void onActivityResumed(@NonNull Activity activity) {
-             View root = activity.getWindow().getDecorView().getRootView();
+             View root = ((ViewGroup) activity.findViewById(android.R.id.content)).getChildAt(0);
+             analyzeHierarchy(root);
           }
 
           @Override
@@ -59,4 +71,6 @@ public class HierarchyChecker {
           public void onActivityDestroyed(@NonNull Activity activity) {}
        });
    }
+
+   private static void analyzeHierarchy(View root) {}
 }
