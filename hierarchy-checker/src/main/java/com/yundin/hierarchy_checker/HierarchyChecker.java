@@ -13,11 +13,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
+import org.jetbrains.annotations.NotNull;
+
 public class HierarchyChecker {
 
    private static String LOG_TAG = "HierarchyChecker";
 
-   public static void init(Application application) {
+   public static void init(@NotNull Application application) {
        application.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
           @Override
           public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
@@ -74,7 +76,7 @@ public class HierarchyChecker {
        });
    }
 
-   private static void analyzeHierarchy(View root) {
+   private static void analyzeHierarchy(@NotNull View root) {
       proceedView(root);
       if (root instanceof ViewGroup) {
          ViewGroup viewGroup = (ViewGroup) root;
@@ -84,7 +86,7 @@ public class HierarchyChecker {
       }
    }
 
-   private static void proceedView(View view) {
+   private static void proceedView(@NotNull View view) {
        // Temp implementation
       StringBuilder sb = new StringBuilder(view.getClass().getName());
       ViewParent parent = view.getParent();
