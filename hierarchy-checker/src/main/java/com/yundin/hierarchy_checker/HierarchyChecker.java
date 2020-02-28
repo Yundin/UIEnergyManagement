@@ -57,8 +57,7 @@ public class HierarchyChecker {
 
           @Override
           public void onActivityResumed(@NonNull Activity activity) {
-//             View root = ((ViewGroup) activity.findViewById(android.R.id.content)).getChildAt(0);
-             View root = activity.getWindow().getDecorView().getRootView();
+             View root = getActivityRoot(activity);
              analyzeHierarchy(root);
           }
 
@@ -74,6 +73,14 @@ public class HierarchyChecker {
           @Override
           public void onActivityDestroyed(@NonNull Activity activity) {}
        });
+   }
+
+   private static View getActivityRoot(Activity activity) {
+      return activity.getWindow().getDecorView().getRootView();
+   }
+
+   private static View getActivityContentRoot(Activity activity) {
+      return ((ViewGroup) activity.findViewById(android.R.id.content)).getChildAt(0);
    }
 
    private static void analyzeHierarchy(@NotNull View root) {
