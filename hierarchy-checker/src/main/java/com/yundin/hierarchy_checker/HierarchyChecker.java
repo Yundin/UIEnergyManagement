@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -54,7 +55,8 @@ public class HierarchyChecker {
 
           @Override
           public void onActivityResumed(@NonNull Activity activity) {
-             View root = ((ViewGroup) activity.findViewById(android.R.id.content)).getChildAt(0);
+//             View root = ((ViewGroup) activity.findViewById(android.R.id.content)).getChildAt(0);
+             View root = activity.getWindow().getDecorView().getRootView();
              analyzeHierarchy(root);
           }
 
@@ -72,5 +74,25 @@ public class HierarchyChecker {
        });
    }
 
-   private static void analyzeHierarchy(View root) {}
+   private static void analyzeHierarchy(View root) {
+      proceedView(root);
+      if (root instanceof ViewGroup) {
+         ViewGroup viewGroup = (ViewGroup) root;
+         for (int i = 0; i < viewGroup.getChildCount(); i++) {
+            analyzeHierarchy(viewGroup.getChildAt(i));
+         }
+      }
+   }
+
+   private static void proceedView(View view) {
+       // Temp implementation
+      StringBuilder sb = new StringBuilder(view.getClass().getName());
+      ViewParent parent = view.getParent();
+      while (parent != null) {
+         sb.append('/');
+         sb.append(parent.getClass().toString());
+         parent = parent.getParent();
+      }
+      Log.d(LOG_TAG, sb.toString());
+   }
 }
