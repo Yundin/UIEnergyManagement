@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import org.jetbrains.annotations.NotNull;
 
+
 public class HierarchyChecker {
 
    private static String LOG_TAG = "HierarchyChecker";
@@ -25,8 +26,8 @@ public class HierarchyChecker {
           public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
              if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 android.app.FragmentManager def = activity.getFragmentManager();
-                 //noinspection deprecation
-                 def.registerFragmentLifecycleCallbacks(new android.app.FragmentManager.FragmentLifecycleCallbacks() {
+                //noinspection deprecation
+                def.registerFragmentLifecycleCallbacks(new android.app.FragmentManager.FragmentLifecycleCallbacks() {
                     @Override
                     public void onFragmentViewCreated(android.app.FragmentManager fm, android.app.Fragment f, View v, Bundle savedInstanceState) {
                        analyzeHierarchy(v);
