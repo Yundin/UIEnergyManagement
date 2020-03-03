@@ -19,6 +19,15 @@ import org.jetbrains.annotations.NotNull;
 public class HierarchyChecker {
 
    private static String LOG_TAG = "HierarchyChecker";
+   private static final ViewGroup.OnHierarchyChangeListener HIERARCHY_CHANGE_LISTENER = new ViewGroup.OnHierarchyChangeListener() {
+      @Override
+      public void onChildViewAdded(View parent, View child) {
+         analyzeHierarchy(child);
+      }
+
+      @Override
+      public void onChildViewRemoved(View parent, View child) {}
+   };
 
    public static void init(@NotNull Application application) {
        application.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
@@ -89,6 +98,8 @@ public class HierarchyChecker {
       proceedView(root);
       if (root instanceof ViewGroup) {
          ViewGroup viewGroup = (ViewGroup) root;
+         viewGroup.setOnHierarchyChangeListener(HIERARCHY_CHANGE_LISTENER);
+
          for (int i = 0; i < viewGroup.getChildCount(); i++) {
             analyzeHierarchy(viewGroup.getChildAt(i));
          }
