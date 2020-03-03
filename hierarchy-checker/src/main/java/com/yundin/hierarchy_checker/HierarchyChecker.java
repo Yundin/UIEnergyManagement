@@ -22,11 +22,12 @@ public class HierarchyChecker {
 
    public static void init(@NotNull Application application) {
        application.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
+
+          @SuppressWarnings("deprecation")
           @Override
           public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
              if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 android.app.FragmentManager def = activity.getFragmentManager();
-                //noinspection deprecation
                 def.registerFragmentLifecycleCallbacks(new android.app.FragmentManager.FragmentLifecycleCallbacks() {
                     @Override
                     public void onFragmentViewCreated(android.app.FragmentManager fm, android.app.Fragment f, View v, Bundle savedInstanceState) {
