@@ -2,7 +2,6 @@ package com.yundin.hierarchy_checker;
 
 import android.app.Activity;
 import android.app.Application;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,7 +10,6 @@ import android.view.ViewParent;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -32,36 +30,8 @@ public class HierarchyChecker {
    public static void init(@NotNull Application application) {
        application.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
 
-          @SuppressWarnings("deprecation")
           @Override
-          public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
-             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                android.app.FragmentManager def = activity.getFragmentManager();
-                def.registerFragmentLifecycleCallbacks(new android.app.FragmentManager.FragmentLifecycleCallbacks() {
-                    @Override
-                    public void onFragmentViewCreated(android.app.FragmentManager fm, android.app.Fragment f, View v, Bundle savedInstanceState) {
-                       analyzeHierarchy(v);
-                    }
-                }, true);
-                Log.d(LOG_TAG, "Simple FragmentManager's FragmentLifecycleCallbacks registered");
-             } else {
-                Log.w(LOG_TAG, "Simple FragmentManager not supporting FragmentLifecycleCallbacks until Android O");
-             }
-
-
-             if (activity instanceof FragmentActivity) {
-                androidx.fragment.app.FragmentManager support = ((FragmentActivity) activity).getSupportFragmentManager();
-                support.registerFragmentLifecycleCallbacks(new androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks() {
-                   @Override
-                   public void onFragmentViewCreated(@NonNull androidx.fragment.app.FragmentManager fm, @NonNull androidx.fragment.app.Fragment f, @NonNull View v, @Nullable Bundle savedInstanceState) {
-                      analyzeHierarchy(v);
-                   }
-                }, true);
-                Log.d(LOG_TAG, "SupportFragmentManager's FragmentLifecycleCallbacks registered");
-             } else {
-                Log.w(LOG_TAG, "Only FragmentActivities support SupportFragmentManager");
-             }
-          }
+          public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {}
 
           @Override
           public void onActivityStarted(@NonNull Activity activity) {}
