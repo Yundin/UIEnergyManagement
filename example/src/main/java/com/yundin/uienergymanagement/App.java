@@ -2,7 +2,7 @@ package com.yundin.uienergymanagement;
 
 import android.app.Application;
 
-import com.yundin.hierarchy_checker.HierarchyChecker;
+import com.yundin.hierarchy_checker.UIManager;
 
 public class App extends Application {
 
@@ -10,6 +10,6 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-        HierarchyChecker.init(this);
+        UIManager.init(this);
     }
 }
