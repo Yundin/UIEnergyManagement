@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -15,7 +16,8 @@
         app:layout_constraintBottom_toTopOf="@id/button"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"/>
 
     <Button
         android:id="@+id/button"
@@ -31,6 +33,7 @@
        android:id="@+id/text_2"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
+       android:layout_marginTop="24dp"
        android:text="Press the button to use SupportFragmentManager"
        app:layout_constraintStart_toStartOf="parent"
        app:layout_constraintEnd_toEndOf="parent"
@@ -44,12 +47,54 @@
         android:text="Open Fragment"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/text_3"
         app:layout_constraintTop_toBottomOf="@id/text_2"/>
+
+    <TextView
+        android:id="@+id/text_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Open second activity"
+        android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toTopOf="@id/button_3"
+        app:layout_constraintTop_toBottomOf="@id/button_2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/button_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Open activity"
+        app:layout_constraintBottom_toTopOf="@id/text_4"
+        app:layout_constraintTop_toBottomOf="@id/text_3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/text_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dynamic add view"
+        android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toTopOf="@id/button_4"
+        app:layout_constraintTop_toBottomOf="@id/button_3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/button_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add view"
+        app:layout_constraintBottom_toTopOf="@id/container"
+        app:layout_constraintTop_toBottomOf="@id/text_4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="300dp"
         app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

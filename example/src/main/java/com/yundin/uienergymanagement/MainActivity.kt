@@ -1,8 +1,12 @@
 package com.yundin.uienergymanagement
 
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,6 +25,22 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container, SecondFragment())
                 .commit()
+        }
+
+        findViewById<Button>(R.id.button_3).setOnClickListener {
+            startActivity(Intent(this, SecondActivity::class.java))
+        }
+
+        val root = findViewById<ConstraintLayout>(R.id.root)
+
+        findViewById<Button>(R.id.button_4).setOnClickListener {
+            val view = View(this)
+            view.setBackgroundColor(Color.BLUE)
+
+            val lp = ConstraintLayout.LayoutParams(100, 100)
+            view.layoutParams = lp
+
+            root.addView(view)
         }
     }
 }
