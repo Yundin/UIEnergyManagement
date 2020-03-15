@@ -13,14 +13,14 @@ class LogOutputter : RecommendationOutputter {
 
     override fun output(original: View, optimal: String) {
 
-        val sb = StringBuilder(original.javaClass.name)
+        val sb = StringBuilder(original.javaClass.simpleName)
         sb.append(" located in ")
 
         val stack = Stack<String>()
 
         var parent: ViewParent? = original.parent
         while (parent != null) {
-            stack.push(parent.javaClass.toString())
+            stack.push(parent.javaClass.canonicalName)
             parent = parent.parent
         }
 
