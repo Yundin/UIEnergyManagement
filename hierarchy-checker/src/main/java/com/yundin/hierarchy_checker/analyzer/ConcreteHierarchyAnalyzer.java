@@ -1,7 +1,9 @@
-package com.yundin.hierarchy_checker;
+package com.yundin.hierarchy_checker.analyzer;
 
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.yundin.hierarchy_checker.outputter.RecommendationOutputter;
 
 import org.jetbrains.annotations.NotNull;
 

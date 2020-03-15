@@ -4,6 +4,10 @@ import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 import android.view.View
+import com.yundin.hierarchy_checker.analyzer.ConcreteHierarchyAnalyzer
+import com.yundin.hierarchy_checker.analyzer.HierarchyAnalyzer
+import com.yundin.hierarchy_checker.outputter.LogOutputter
+import com.yundin.hierarchy_checker.outputter.RecommendationOutputter
 
 class UIManager {
 

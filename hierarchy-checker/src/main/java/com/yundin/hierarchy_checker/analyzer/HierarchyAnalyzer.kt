@@ -1,4 +1,4 @@
-package com.yundin.hierarchy_checker
+package com.yundin.hierarchy_checker.analyzer
 
 import android.view.View
 
