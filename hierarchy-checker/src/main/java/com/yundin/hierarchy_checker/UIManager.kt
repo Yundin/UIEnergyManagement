@@ -4,6 +4,8 @@ import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 import android.view.View
+import com.yundin.hierarchy_checker.adviser.Adviser
+import com.yundin.hierarchy_checker.adviser.RandomAdviser
 import com.yundin.hierarchy_checker.analyzer.ConcreteHierarchyAnalyzer
 import com.yundin.hierarchy_checker.analyzer.HierarchyAnalyzer
 import com.yundin.hierarchy_checker.outputter.LogOutputter
@@ -16,7 +18,8 @@ class UIManager {
         fun init(application: Application) {
 
             val outputter: RecommendationOutputter = LogOutputter()
-            val analyzer: HierarchyAnalyzer = ConcreteHierarchyAnalyzer(outputter)
+            val adviser: Adviser = RandomAdviser()
+            val analyzer: HierarchyAnalyzer = ConcreteHierarchyAnalyzer(outputter, adviser)
 
             application.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
                 override fun onActivityStarted(activity: Activity) {

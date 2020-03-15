@@ -3,6 +3,7 @@ package com.yundin.hierarchy_checker.analyzer;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.yundin.hierarchy_checker.adviser.Adviser;
 import com.yundin.hierarchy_checker.outputter.RecommendationOutputter;
 
 import org.jetbrains.annotations.NotNull;
@@ -12,10 +13,12 @@ public class ConcreteHierarchyAnalyzer implements HierarchyAnalyzer {
 
    private RecommendationOutputter outputter;
    private ViewGroup.OnHierarchyChangeListener hierarchyChangeListener;
+   private Adviser adviser;
 
-   public ConcreteHierarchyAnalyzer(RecommendationOutputter outputter) {
+   public ConcreteHierarchyAnalyzer(RecommendationOutputter outputter, Adviser adviser) {
       this.outputter = outputter;
       this.hierarchyChangeListener = new HierarchyChangeListener();
+      this.adviser = adviser;
    }
 
    @Override
@@ -32,7 +35,10 @@ public class ConcreteHierarchyAnalyzer implements HierarchyAnalyzer {
    }
 
    private void proceedView(@NotNull View view) {
-      outputter.output(view, "TextView");
+      String alternative = adviser.findAlternative(view.getClass().getSimpleName());
+      if (alternative != null) {
+         outputter.output(view, alternative);
+      }
    }
 
    class HierarchyChangeListener implements ViewGroup.OnHierarchyChangeListener {
