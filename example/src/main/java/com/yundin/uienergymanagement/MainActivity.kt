@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.button_2).setOnClickListener {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, SecondFragment())
+                .replace(R.id.container_support, SecondFragment())
                 .commit()
         }
 
