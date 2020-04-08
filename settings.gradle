@@ -1,3 +1,4 @@
 rootProject.name='UIEnergyManagement'
 include ':example'
 include ':hierarchy-checker'
+include ':estimation'
