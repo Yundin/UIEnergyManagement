@@ -1,5 +1,6 @@
 package com.yundin.estimation
 
+import android.view.View
 import android.widget.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
@@ -27,36 +28,37 @@ class EstimationTest : TestCase() {
                     TextViewWrapper(Button::class.java),
                     ViewWrapper(CalendarView::class.java),
                     TextViewWrapper(CheckBox::class.java),
-                    TextViewWrapper(CheckedTextView::class.java),
+                    TextViewWrapper(CheckedTextView::class.java), // needs attention
                     ViewWrapper(Chronometer::class.java),
                     ViewWrapper(DatePicker::class.java),
                     TextViewWrapper(EditText::class.java),
-                    ViewWrapper(ImageButton::class.java),
-                    ViewWrapper(ImageSwitcher::class.java),
-                    ViewWrapper(ImageView::class.java),
-                    ViewWrapper(MultiAutoCompleteTextView::class.java),
-                    ViewWrapper(NumberPicker::class.java),
+                    ImageViewWrapper(ImageButton::class.java),
+                    //ViewWrapper(ImageSwitcher::class.java), // not having content for now
+                    ImageViewWrapper(ImageView::class.java),
+                    TextViewWrapper(MultiAutoCompleteTextView::class.java),
+                    ViewWrapper(NumberPicker::class.java), // needs attention
                     ViewWrapper(ProgressBar::class.java),
-                    ViewWrapper(QuickContactBadge::class.java),
+                    //ViewWrapper(QuickContactBadge::class.java), // not having content for now
                     TextViewWrapper(RadioButton::class.java),
-                    ViewWrapper(RatingBar::class.java),
+                    //ViewWrapper(RatingBar::class.java), // not having content for now
                     ViewWrapper(SearchView::class.java),
-                    ViewWrapper(SeekBar::class.java),
+                    ViewWrapper(SeekBar::class.java), // needs attention
                     ViewWrapper(Space::class.java),
                     TextViewWrapper(Switch::class.java),
                     ViewWrapper(TextClock::class.java),
-                    ViewWrapper(TextSwitcher::class.java),
+                    //ViewWrapper(TextSwitcher::class.java), // not having content for now
                     TextViewWrapper(TextView::class.java),
                     ViewWrapper(TimePicker::class.java),
                     TextViewWrapper(ToggleButton::class.java),
-                    ViewWrapper(VideoView::class.java)
+                    //ViewWrapper(VideoView::class.java), // not having content for now
+                    ViewWrapper(View::class.java)
                 )
                 for (view in views) {
                     replaceView(activity, view)
                     activity.runOnUiThread {
                         activity.setTitle(view.viewClass.simpleName)
                     }
-                    Thread.sleep(1000)
+                    Thread.sleep(5000)
                 }
             }
         }
