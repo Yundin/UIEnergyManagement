@@ -3,6 +3,7 @@ package com.yundin.estimation
 import android.view.View
 import android.widget.CheckedTextView
 import android.widget.ImageView
+import android.widget.NumberPicker
 import android.widget.TextView
 
 open class ViewWrapper(val viewClass: Class<*>) {
@@ -41,5 +42,12 @@ class CheckedTextViewWrapper(private val setCheckMark: Boolean = false): TextVie
                 }
             }
         }
+    }
+}
+
+class NumberPickerWrapper: ViewWrapper(NumberPicker::class.java) {
+
+    override fun beforeAdd(view: View) {
+        (view as NumberPicker).maxValue = 10
     }
 }

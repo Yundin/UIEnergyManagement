@@ -36,7 +36,7 @@ class EstimationTest : TestCase() {
                     //ViewWrapper(ImageSwitcher::class.java), // not having content for now
                     ImageViewWrapper(ImageView::class.java),
                     TextViewWrapper(MultiAutoCompleteTextView::class.java),
-                    ViewWrapper(NumberPicker::class.java), // needs attention
+                    NumberPickerWrapper(),
                     ViewWrapper(ProgressBar::class.java),
                     //ViewWrapper(QuickContactBadge::class.java), // not having content for now
                     TextViewWrapper(RadioButton::class.java),
