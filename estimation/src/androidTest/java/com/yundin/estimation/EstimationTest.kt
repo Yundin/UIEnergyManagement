@@ -42,7 +42,7 @@ class EstimationTest : TestCase() {
                     TextViewWrapper(RadioButton::class.java),
                     //ViewWrapper(RatingBar::class.java), // not having content for now
                     ViewWrapper(SearchView::class.java),
-                    ViewWrapper(SeekBar::class.java), // needs attention
+                    ViewWrapper(SeekBar::class.java),
                     ViewWrapper(Space::class.java),
                     TextViewWrapper(Switch::class.java),
                     ViewWrapper(TextClock::class.java),
