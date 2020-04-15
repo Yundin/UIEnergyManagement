@@ -16,7 +16,7 @@ class EstimationTest : TestCase() {
     val activityTestRule = ActivityTestRule(MainActivity::class.java, true, false)
 
     @Test
-    fun exampleTest() {
+    fun estimationTest() {
         run {
             step("Open Main") {
                 activityTestRule.launchActivity(null)
@@ -28,7 +28,7 @@ class EstimationTest : TestCase() {
                     TextViewWrapper(Button::class.java),
                     ViewWrapper(CalendarView::class.java),
                     TextViewWrapper(CheckBox::class.java),
-                    TextViewWrapper(CheckedTextView::class.java), // needs attention
+                    CheckedTextViewWrapper(),
                     ViewWrapper(Chronometer::class.java),
                     ViewWrapper(DatePicker::class.java),
                     TextViewWrapper(EditText::class.java),
@@ -60,6 +60,24 @@ class EstimationTest : TestCase() {
                     }
                     Thread.sleep(5000)
                 }
+            }
+        }
+    }
+
+    @Test
+    fun singleViewTest() {
+        run {
+            step("Open Main") {
+                activityTestRule.launchActivity(null)
+            }
+            step("Start view testing") {
+                val activity = activityTestRule.activity
+                val view = CheckedTextViewWrapper(false)
+                replaceView(activity, view)
+                activity.runOnUiThread {
+                    activity.setTitle(view.viewClass.simpleName)
+                }
+                Thread.sleep(10000)
             }
         }
     }
