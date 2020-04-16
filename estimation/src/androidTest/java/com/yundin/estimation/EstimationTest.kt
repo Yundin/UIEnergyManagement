@@ -40,7 +40,7 @@ class EstimationTest : TestCase() {
                     ViewWrapper(ProgressBar::class.java),
                     //ViewWrapper(QuickContactBadge::class.java), // not having content for now
                     TextViewWrapper(RadioButton::class.java),
-                    //ViewWrapper(RatingBar::class.java), // not having content for now
+                    RatingBarWrapper(),
                     ViewWrapper(SearchView::class.java),
                     ViewWrapper(SeekBar::class.java),
                     ViewWrapper(Space::class.java),
@@ -72,7 +72,7 @@ class EstimationTest : TestCase() {
             }
             step("Start view testing") {
                 val activity = activityTestRule.activity
-                val view = TextSwitcherWrapper(activity)
+                val view = RatingBarWrapper()
                 replaceView(activity, view)
                 activity.runOnUiThread {
                     activity.setTitle(view.viewClass.simpleName)

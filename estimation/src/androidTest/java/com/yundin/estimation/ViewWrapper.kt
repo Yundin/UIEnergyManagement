@@ -2,6 +2,7 @@ package com.yundin.estimation
 
 import android.content.Context
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
 
 open class ViewWrapper(val viewClass: Class<*>) {
@@ -80,5 +81,13 @@ class TextSwitcherWrapper(private val context: Context): ViewSwitcherWrapper(Tex
 
     override fun makeView(): View {
         return TextView(context)
+    }
+}
+
+class RatingBarWrapper: ViewWrapper(RatingBar::class.java) {
+
+    override fun beforeAdd(view: View) {
+        val lp = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        view.layoutParams = lp
     }
 }
