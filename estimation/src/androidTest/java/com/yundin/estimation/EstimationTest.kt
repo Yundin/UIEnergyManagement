@@ -33,7 +33,7 @@ class EstimationTest : TestCase() {
                     ViewWrapper(DatePicker::class.java),
                     TextViewWrapper(EditText::class.java),
                     ImageViewWrapper(ImageButton::class.java),
-                    //ViewWrapper(ImageSwitcher::class.java), // not having content for now
+                    ImageSwitcherWrapper(activity),
                     ImageViewWrapper(ImageView::class.java),
                     TextViewWrapper(MultiAutoCompleteTextView::class.java),
                     NumberPickerWrapper(),
@@ -46,7 +46,7 @@ class EstimationTest : TestCase() {
                     ViewWrapper(Space::class.java),
                     TextViewWrapper(Switch::class.java),
                     ViewWrapper(TextClock::class.java),
-                    //ViewWrapper(TextSwitcher::class.java), // not having content for now
+                    TextSwitcherWrapper(activity),
                     TextViewWrapper(TextView::class.java),
                     ViewWrapper(TimePicker::class.java),
                     TextViewWrapper(ToggleButton::class.java),
@@ -72,7 +72,7 @@ class EstimationTest : TestCase() {
             }
             step("Start view testing") {
                 val activity = activityTestRule.activity
-                val view = CheckedTextViewWrapper(false)
+                val view = TextSwitcherWrapper(activity)
                 replaceView(activity, view)
                 activity.runOnUiThread {
                     activity.setTitle(view.viewClass.simpleName)
