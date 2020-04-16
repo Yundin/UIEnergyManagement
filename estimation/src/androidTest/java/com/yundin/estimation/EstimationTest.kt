@@ -50,7 +50,7 @@ class EstimationTest : TestCase() {
                     TextViewWrapper(TextView::class.java),
                     ViewWrapper(TimePicker::class.java),
                     TextViewWrapper(ToggleButton::class.java),
-                    //ViewWrapper(VideoView::class.java), // not having content for now
+                    VideoViewWrapper(activity),
                     ViewWrapper(View::class.java)
                 )
                 for (view in views) {
@@ -72,7 +72,7 @@ class EstimationTest : TestCase() {
             }
             step("Start view testing") {
                 val activity = activityTestRule.activity
-                val view = RatingBarWrapper()
+                val view = VideoViewWrapper(activity)
                 replaceView(activity, view)
                 activity.runOnUiThread {
                     activity.setTitle(view.viewClass.simpleName)

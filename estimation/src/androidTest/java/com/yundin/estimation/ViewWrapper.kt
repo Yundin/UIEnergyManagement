@@ -1,6 +1,7 @@
 package com.yundin.estimation
 
 import android.content.Context
+import android.net.Uri
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
@@ -89,5 +90,14 @@ class RatingBarWrapper: ViewWrapper(RatingBar::class.java) {
     override fun beforeAdd(view: View) {
         val lp = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         view.layoutParams = lp
+    }
+}
+
+class VideoViewWrapper(private val context: Context): ViewWrapper(VideoView::class.java) {
+
+    override fun beforeAdd(view: View) {
+        val uri = Uri.parse("android.resource://" + context.packageName + "/" + R.raw.sample)
+        (view as VideoView).setVideoURI(uri)
+        view.start()
     }
 }
