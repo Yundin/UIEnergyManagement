@@ -19,7 +19,7 @@ class UIManager {
 
             val outputter: RecommendationOutputter = LogOutputter()
             val adviser: Adviser = RandomAdviser()
-            val analyzer: HierarchyAnalyzer = ConcreteHierarchyAnalyzer(outputter, adviser)
+            val analyzer: HierarchyAnalyzer = ConcreteHierarchyAnalyzer(adviser, outputter)
 
             application.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
                 override fun onActivityStarted(activity: Activity) {
