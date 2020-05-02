@@ -24,8 +24,7 @@ class ConcreteHierarchyAnalyzer(
     }
 
     private fun proceedView(view: View) {
-        val alternative = adviser.findAlternative(view.javaClass.simpleName)
-        if (alternative != null) {
+        adviser.findAlternativeAsync(view.javaClass.simpleName) { alternative ->
             outputter.output(view, alternative)
         }
     }
