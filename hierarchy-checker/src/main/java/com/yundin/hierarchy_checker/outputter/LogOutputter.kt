@@ -11,9 +11,10 @@ class LogOutputter : RecommendationOutputter {
         private const val LOG_TAG = "HierarchyChecker"
     }
 
-    override fun output(original: View, optimal: String) {
+    override fun output(original: View, advice: String) {
 
-        val sb = StringBuilder(original.javaClass.simpleName)
+        val sb = StringBuilder("Advice for ")
+        sb.append(original.javaClass.simpleName)
         sb.append(" located in ")
 
         val stack = Stack<String>()
@@ -29,7 +30,7 @@ class LogOutputter : RecommendationOutputter {
             sb.append(stack.pop())
         }
 
-        sb.append(" could be changed to $optimal")
+        sb.append(" : $advice")
 
         Log.i(LOG_TAG, sb.toString())
     }

@@ -4,5 +4,5 @@ import android.view.View
 
 interface RecommendationOutputter {
 
-    fun output(original: View, optimal: String)
+    fun output(original: View, advice: String)
 }
