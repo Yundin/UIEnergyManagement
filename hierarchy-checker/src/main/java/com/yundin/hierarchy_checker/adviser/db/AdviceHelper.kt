@@ -16,6 +16,7 @@ class AdviceHelper(private val context: Context) : SQLiteOpenHelper(context, DAT
         if(!checkIfExists()) {
             copyFromAssets()
         }
+        upgradeIfNeeded()
     }
 
     fun getAdvices(database: SQLiteDatabase, viewName: String): List<String> {
@@ -51,10 +52,24 @@ class AdviceHelper(private val context: Context) : SQLiteOpenHelper(context, DAT
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+        throw IllegalStateException("upgradeIfNeeded should be called on initialization")
     }
 
     private fun checkIfExists() : Boolean {
         return context.getDatabasePath(DATABASE_NAME).exists()
+    }
+
+    private fun upgradeIfNeeded() {
+        val db = SQLiteDatabase.openDatabase(context.getDatabasePath(DATABASE_NAME).path, null, SQLiteDatabase.OPEN_READONLY)
+        val version = db.version
+        db.close()
+        if (version != DATABASE_VERSION) {
+            delete()
+            copyFromAssets()
+            val newdb = SQLiteDatabase.openDatabase(context.getDatabasePath(DATABASE_NAME).path, null, SQLiteDatabase.OPEN_READWRITE)
+            newdb.version = DATABASE_VERSION
+            newdb.close()
+        }
     }
 
     private fun copyFromAssets() {
@@ -66,5 +81,12 @@ class AdviceHelper(private val context: Context) : SQLiteOpenHelper(context, DAT
 
         inputStream.close()
         outStream.close()
+    }
+
+    private fun delete() {
+        val file = context.getDatabasePath(DATABASE_NAME)
+        if (file.exists()) {
+            file.delete()
+        }
     }
 }
