@@ -23,8 +23,7 @@ class DatabaseAdviser(context: Context) : Adviser {
 
     override fun findAlternativeAsync(viewName: String, callback: (String) -> Unit) {
         executorService.execute {
-            val database = helper.readableDatabase
-            val advices = helper.getAdvices(database, viewName)
+            val advices = helper.getAdvices(viewName)
             mainHandler.post {
                 advices.forEach(callback)
             }

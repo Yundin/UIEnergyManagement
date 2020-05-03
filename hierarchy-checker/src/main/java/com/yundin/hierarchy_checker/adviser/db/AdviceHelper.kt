@@ -19,7 +19,9 @@ class AdviceHelper(private val context: Context) : SQLiteOpenHelper(context, DAT
         upgradeIfNeeded()
     }
 
-    fun getAdvices(database: SQLiteDatabase, viewName: String): List<String> {
+    fun getAdvices(viewName: String): List<String> {
+        val database = readableDatabase
+
         val projection = arrayOf(AdviceContract.AdviceEntry.COLUMN_NAME_ADVICE)
 
         val selection = "${AdviceContract.AdviceEntry.COLUMN_NAME_VIEW} = ?"
