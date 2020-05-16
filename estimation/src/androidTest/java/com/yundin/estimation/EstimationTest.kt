@@ -1,8 +1,7 @@
 package com.yundin.estimation
 
-import android.view.View
-import android.widget.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
@@ -23,36 +22,7 @@ class EstimationTest : TestCase() {
             }
             step("Start views testing") {
                 val activity = activityTestRule.activity
-                val views = listOf(
-                    TextViewWrapper(AutoCompleteTextView::class.java),
-                    TextViewWrapper(Button::class.java),
-                    ViewWrapper(CalendarView::class.java),
-                    TextViewWrapper(CheckBox::class.java),
-                    CheckedTextViewWrapper(),
-                    ViewWrapper(Chronometer::class.java),
-                    ViewWrapper(DatePicker::class.java),
-                    TextViewWrapper(EditText::class.java),
-                    ImageViewWrapper(ImageButton::class.java),
-                    ImageSwitcherWrapper(activity),
-                    ImageViewWrapper(ImageView::class.java),
-                    TextViewWrapper(MultiAutoCompleteTextView::class.java),
-                    NumberPickerWrapper(),
-                    ViewWrapper(ProgressBar::class.java),
-                    //ViewWrapper(QuickContactBadge::class.java), // not having content for now
-                    TextViewWrapper(RadioButton::class.java),
-                    RatingBarWrapper(),
-                    ViewWrapper(SearchView::class.java),
-                    ViewWrapper(SeekBar::class.java),
-                    ViewWrapper(Space::class.java),
-                    TextViewWrapper(Switch::class.java),
-                    ViewWrapper(TextClock::class.java),
-                    TextSwitcherWrapper(activity),
-                    TextViewWrapper(TextView::class.java),
-                    ViewWrapper(TimePicker::class.java),
-                    TextViewWrapper(ToggleButton::class.java),
-                    VideoViewWrapper(activity),
-                    ViewWrapper(View::class.java)
-                )
+                val views = getWrappers(activity)
                 for (view in views) {
                     replaceView(activity, view)
                     activity.runOnUiThread {
@@ -79,6 +49,23 @@ class EstimationTest : TestCase() {
                 }
                 Thread.sleep(10000)
             }
+        }
+    }
+
+    @Test
+    fun testViewByIndex() {
+        run {
+            val instrumentation: MyTestRunner = InstrumentationRegistry.getInstrumentation() as MyTestRunner
+            val index = instrumentation.testIndex
+            println("Index: $index")
+            val activity = activityTestRule.launchActivity(null)
+            val wrapper = getWrappers(activity)[index]
+
+            activity.runOnUiThread {
+                replaceView(activity, wrapper)
+                activity.title = wrapper.viewClass.simpleName
+            }
+            Thread.sleep(instrumentation.testingTime.toLong())
         }
     }
 }
