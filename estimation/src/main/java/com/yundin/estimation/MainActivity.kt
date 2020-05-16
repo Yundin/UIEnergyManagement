@@ -43,8 +43,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val handler = Handler(Looper.getMainLooper())
-        val index = intent.extras!!.getInt("index")
-        val delay = intent.extras!!.getInt("delay")
+        val index = intent.extras?.getInt("index") ?: return
+        val delay = intent.extras?.getInt("delay") ?: 0
 
         val view = views[index]
         replaceView(this, view)
