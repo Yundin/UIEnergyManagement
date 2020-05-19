@@ -10,6 +10,5 @@
 .DS_Store
 /build
 /captures
-/results
 .externalNativeBuild
 .cxx
