@@ -1,0 +1,13 @@
+    Uid u0a662: 0.0220 ( cpu=0.0220 ) Including smearing: 0.0231 ( proportional=0.00117 )
+  u0a662:
+    Wake lock *launch* realtime
+    Foreground activities: 3m 2s 770ms realtime (0 times) (running)
+    Foreground services: 1s 176ms realtime (2 times)
+    Top for: 3m 0s 875ms 
+    Fg Service for: 1s 176ms 
+    Cached for: 469ms 
+    Total running: 3m 2s 520ms 
+    Total cpu time: u=1s 500ms s=190ms 
+    Proc com.yundin.estimation:
+      CPU: 0ms usr + 0ms krn ; 500ms fg
+      1 starts
