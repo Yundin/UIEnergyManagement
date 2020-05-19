@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-TIME_MS=100
+TIME_MS=30000
 VIEWS_COUNT=27
 
 main() {
@@ -14,20 +14,29 @@ main() {
       adb shell dumpsys batterystats --reset || exit 2
       echo "Batterystats reset success"
 
-      NOW=$(date +'%Y-%m-%d %T')
+      START=$(date +'%Y-%m-%d %T')
+      echo $START
       echo "Testing..."
       adb shell am instrument -w \
       -e class com.yundin.estimation.EstimationTest#testViewByIndex \
       -e index $i \
       -e time $TIME_MS \
       com.yundin.estimation.test/com.yundin.estimation.MyTestRunner || exit 5
+      END=$(date +'%Y-%m-%d %T')
       echo "Testing completed"
 
       echo "Dumping..."
+      adb shell dumpsys Batterystats --write || exit 6
       adb shell dumpsys batterystats > "results/battery_$i" || exit 3
-      echo $NOW > "results/cpu_$i"
-      adb shell dumpsys cpuinfo >> "results/cpu_$i" || exit 4
+      echo $START > "results/cpu_$i"
+      echo $END >> "results/cpu_$i"
+      #adb shell dumpsys cpuinfo >> "results/cpu_$i" || exit 4
       echo "Dumpsys complete successfully\n"
+  done
+
+  cpuinfo=$(adb shell dumpsys cpuinfo)
+  for f in results/*; do
+      echo $cpuinfo >> f
   done
 }
 
