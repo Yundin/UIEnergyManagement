@@ -43,13 +43,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val handler = Handler(Looper.getMainLooper())
-        val index = intent.extras?.getInt("index") ?: return
-        val delay = intent.extras?.getInt("delay") ?: 0
+        val index = intent.extras?.getInt("index") ?: 0
+        val delay = intent.extras?.getInt("delay") ?: 180000
 
+        showView(index)
+
+        handler.postDelayed({ finish() }, delay.toLong())
+    }
+
+    private fun showView(index: Int) {
         val view = views[index]
         replaceView(this, view)
         title = view.viewClass.simpleName
-
-        handler.postDelayed({ finish() }, delay.toLong())
     }
 }
