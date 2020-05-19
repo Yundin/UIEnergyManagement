@@ -1,7 +1,8 @@
 #!/bin/zsh
 
-TIME_MS=30000
-VIEWS_COUNT=27
+TIME_MS=180000
+#VIEWS_COUNT=27
+VIEWS_COUNT=1
 
 main() {
   adb shell exit || exit 1
@@ -26,7 +27,7 @@ main() {
       echo "Testing completed"
 
       echo "Dumping..."
-      adb shell dumpsys Batterystats --write || exit 6
+      adb shell dumpsys batterystats --write || exit 6
       adb shell dumpsys batterystats > "results/battery_$i" || exit 3
       echo $START > "results/cpu_$i"
       echo $END >> "results/cpu_$i"
@@ -35,8 +36,8 @@ main() {
   done
 
   cpuinfo=$(adb shell dumpsys cpuinfo)
-  for f in results/*; do
-      echo $cpuinfo >> f
+  for f in results/cpu_*; do
+      echo $cpuinfo >> $f
   done
 }
 
