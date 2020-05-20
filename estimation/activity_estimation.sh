@@ -1,8 +1,7 @@
 #!/bin/zsh
 
-TIME_MS=180000
-#VIEWS_COUNT=27
-VIEWS_COUNT=1
+TIME_MS=300000
+VIEWS_COUNT=27
 
 main() {
   adb shell exit || exit 1
