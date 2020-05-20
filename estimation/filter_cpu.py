@@ -1,7 +1,7 @@
 import os
 import glob
 
-UID = 1000
+UID = 10662
 results_dir = 'cpu_results_filtered'
 
 file_names = glob.glob("results/cpu_*")
