@@ -10,33 +10,33 @@ import androidx.appcompat.app.AppCompatActivity
 class MainActivity : AppCompatActivity() {
 
     private val views = listOf(
-        TextViewWrapper(AutoCompleteTextView::class.java),
-        TextViewWrapper(Button::class.java),
-        ViewWrapper(CalendarView::class.java),
-        TextViewWrapper(CheckBox::class.java),
-        CheckedTextViewWrapper(),
-        ViewWrapper(Chronometer::class.java),
-        ViewWrapper(DatePicker::class.java),
-        TextViewWrapper(EditText::class.java),
-        ImageViewWrapper(ImageButton::class.java),
-        ImageSwitcherWrapper(this),
-        ImageViewWrapper(ImageView::class.java),
-        TextViewWrapper(MultiAutoCompleteTextView::class.java),
-        NumberPickerWrapper(),
-        ViewWrapper(ProgressBar::class.java),
-        TextViewWrapper(RadioButton::class.java),
-        RatingBarWrapper(),
-        ViewWrapper(SearchView::class.java),
-        ViewWrapper(SeekBar::class.java),
-        ViewWrapper(Space::class.java),
-        TextViewWrapper(Switch::class.java),
-        ViewWrapper(TextClock::class.java),
-        TextSwitcherWrapper(this),
-        TextViewWrapper(TextView::class.java),
-        ViewWrapper(TimePicker::class.java),
-        TextViewWrapper(ToggleButton::class.java),
-        VideoViewWrapper(this),
-        ViewWrapper(View::class.java)
+        TextViewWrapper(AutoCompleteTextView::class.java), // 0
+        TextViewWrapper(Button::class.java), // 1
+        ViewWrapper(CalendarView::class.java), // 2
+        TextViewWrapper(CheckBox::class.java), // 3
+        CheckedTextViewWrapper(), // 4
+        ViewWrapper(Chronometer::class.java), // 5
+        ViewWrapper(DatePicker::class.java), // 6
+        TextViewWrapper(EditText::class.java), // 7
+        ImageViewWrapper(ImageButton::class.java), // 8
+        ImageSwitcherWrapper(this), // 9
+        ImageViewWrapper(ImageView::class.java), // 10
+        TextViewWrapper(MultiAutoCompleteTextView::class.java), // 11
+        NumberPickerWrapper(), // 12
+        ViewWrapper(ProgressBar::class.java), // 13
+        TextViewWrapper(RadioButton::class.java), // 14
+        RatingBarWrapper(), // 15
+        ViewWrapper(SearchView::class.java), // 16
+        ViewWrapper(SeekBar::class.java), // 17
+        ViewWrapper(Space::class.java), // 18
+        TextViewWrapper(Switch::class.java), // 19
+        ViewWrapper(TextClock::class.java), // 20
+        TextSwitcherWrapper(this), // 21
+        TextViewWrapper(TextView::class.java), // 22
+        ViewWrapper(TimePicker::class.java), // 23
+        TextViewWrapper(ToggleButton::class.java), // 24
+        VideoViewWrapper(this), // 25
+        ViewWrapper(View::class.java) // 26
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
