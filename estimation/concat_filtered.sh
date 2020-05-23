@@ -5,7 +5,7 @@ for dir in $@; do
         echo "Pass directories only"
         exit 1
     fi
-    for f in $dir*; do
+    for f in "$dir"/*; do
         echo $f >> result
         cat $f | head -n1 | cut -d' ' -f 13 >> result
         cat $f | sed -nE 's/.*(u=.*) (s=.*)/\1 \2/p' >> result
