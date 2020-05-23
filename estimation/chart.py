@@ -16,12 +16,13 @@ if os.path.exists(path):
     i = 0
     for line in file:
         no_new = line[:-1]
-        if i % 5 == 0:
+        index = i % 4
+        if index == 0:
             names.append(no_new)
-        elif i % 5 == 1:
+        elif index == 1:
             mAh.append(float(no_new))
-        elif i % 5 == 3:
-            time.append(int(no_new))
+        elif index == 2:
+            time.append(float(no_new))
         i += 1
 
     plt.rcdefaults()
