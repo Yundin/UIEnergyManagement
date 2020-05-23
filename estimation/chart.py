@@ -25,10 +25,10 @@ if os.path.exists(path):
             time.append(float(no_new))
         i += 1
 
-    sorted_list = sorted(zip(mAh, time, names))
+    sorted_list = sorted(zip(time, mAh, names))
     names = [n for _,_,n in sorted_list]
-    mAh = [m for m,_,_ in sorted_list]
-    time = [t for _,t,_ in sorted_list]
+    mAh = [m for _,m,_ in sorted_list]
+    time = [t for t,_,_ in sorted_list]
 
     plt.rcdefaults()
     fig, ax = plt.subplots()
