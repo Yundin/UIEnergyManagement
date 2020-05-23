@@ -2,6 +2,7 @@
 
 import sys
 import os
+import statistics
 
 real_names = ['AutoCompleteTextView', 'Button', 'CalendarView', 'CheckBox', 'CheckedTextView', 'Chronometer', 'DatePicker', 'EditText', 'ImageButton', 'ImageSwitcher', 'ImageView', 'MultiAutoCompleteTextView', 'NumberPicker', 'ProgressBar', 'RadioButton', 'RatingBar', 'SearchView', 'SeekBar', 'Space', 'Switch', 'TextClock', 'TextSwitcher', 'TextView', 'TimePicker', 'ToggleButton', 'VideoView', 'View']
 
@@ -16,7 +17,7 @@ for name in file_names:
     with open(name) as f:
         files.append(f.readlines())
 
-out = open('avg', 'w')
+out = open('median', 'w')
 count = len(files)
 lines_count = len(files[0])
 for i in range(lines_count):
@@ -33,18 +34,9 @@ for i in range(lines_count):
         out.write(real_name)
         continue
     lines = [f[i] for f in files]
-    if index == 1:
-        s = 0.0
-        for line in lines:
-            s += float(line[:-1])
-        avg = s / count
-        out.write(str(avg) + '\n')
-    else:
-        s = 0
-        for line in lines:
-            s += int(line[:-1])
-        avg = s / count
-        out.write(str(avg) + '\n')
+    items = [float(l[:-1]) for l in lines]
+    median = statistics.median(items)
+    out.write(str(median) + '\n')
 
 out.flush()
 out.close()
