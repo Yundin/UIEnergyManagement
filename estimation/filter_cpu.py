@@ -6,7 +6,10 @@ import glob
 UID = 10662
 results_dir = 'cpu_results_filtered'
 
-file_names = glob.glob("results/cpu_*")
+if len(sys.argv) > 1:
+    file_names = sys.argv[1:]
+else:
+    file_names = glob.glob("results/battery_*")
 
 for name in file_names:
     f_in = open(name, 'r')
