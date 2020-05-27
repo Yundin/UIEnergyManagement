@@ -29,8 +29,11 @@ for i in range(lines_count):
         continue
     if index == 0:
         name = files[0][i]
-        num = name.split('battery_')[1][:-1]
-        real_name = real_names[int(num)] + '\n'
+        try:
+            num = name.split('battery_')[1][:-1]
+            real_name = real_names[int(num)] + '\n'
+        except IndexError:
+            real_name = name
         out.write(real_name)
         continue
     lines = [f[i] for f in files]

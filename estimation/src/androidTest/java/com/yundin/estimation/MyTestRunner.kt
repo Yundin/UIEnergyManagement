@@ -6,7 +6,7 @@ import androidx.test.runner.AndroidJUnitRunner
 class MyTestRunner : AndroidJUnitRunner() {
 
     var testIndex: Int = 0
-    var testingTime: Int = 1000
+    var testingTime: Int = 0
 
     override fun onCreate(arguments: Bundle?) {
         super.onCreate(arguments)
