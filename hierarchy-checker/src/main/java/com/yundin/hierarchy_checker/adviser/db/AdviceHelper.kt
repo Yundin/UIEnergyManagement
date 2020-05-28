@@ -19,7 +19,7 @@ class AdviceHelper(private val context: Context) : SQLiteOpenHelper(context, DAT
         upgradeIfNeeded()
     }
 
-    fun getAdvices(viewName: String): List<String> {
+    fun getAdvice(viewName: String): String? {
         val database = readableDatabase
 
         val projection = arrayOf(AdviceContract.AdviceEntry.COLUMN_NAME_ADVICE)
@@ -37,16 +37,13 @@ class AdviceHelper(private val context: Context) : SQLiteOpenHelper(context, DAT
             null
         )
 
-        val res = mutableListOf<String>()
         with(cursor) {
-            while (moveToNext()) {
+            if (moveToNext()) {
                 val adviceIndex = getColumnIndex(AdviceContract.AdviceEntry.COLUMN_NAME_ADVICE)
-                val advice = getString(adviceIndex)
-                res.add(advice)
+                return getString(adviceIndex)
             }
+            return null
         }
-
-        return res
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
