@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         var i = 0
 
         findViewById<Button>(R.id.button_4).setOnClickListener {
-            val view = View(this)
+            val view = TextView(this)
             view.setBackgroundColor(Color.BLUE)
 
             val lp = ConstraintLayout.LayoutParams(100, 100)
