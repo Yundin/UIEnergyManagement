@@ -1,5 +1,6 @@
 package com.yundin.hierarchy_checker.outputter
 
+import android.content.res.Resources
 import android.util.Log
 import android.view.View
 import android.view.ViewParent
@@ -15,19 +16,25 @@ class LogOutputter : RecommendationOutputter {
 
         val sb = StringBuilder("Advice for ")
         sb.append(original.javaClass.simpleName)
-        sb.append(" located in ")
+        try {
+            val id = original.resources.getResourceEntryName(original.id)
+            sb.append(" with id $id")
+        } catch (e: Resources.NotFoundException) {
+            // id was generated or not present
+            sb.append(" located in ")
 
-        val stack = Stack<String>()
+            val stack = Stack<String>()
 
-        var parent: ViewParent? = original.parent
-        while (parent != null) {
-            stack.push(parent.javaClass.canonicalName)
-            parent = parent.parent
-        }
+            var parent: ViewParent? = original.parent
+            while (parent != null) {
+                stack.push(parent.javaClass.canonicalName)
+                parent = parent.parent
+            }
 
-        while (!stack.empty()) {
-            sb.append('/')
-            sb.append(stack.pop())
+            while (!stack.empty()) {
+                sb.append('/')
+                sb.append(stack.pop())
+            }
         }
 
         sb.append(" : $advice")
