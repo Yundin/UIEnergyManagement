@@ -1,10 +1,13 @@
 package com.yundin.hierarchy_checker.analyzer
 
+import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.OnHierarchyChangeListener
+import androidx.core.view.ViewCompat
 import com.yundin.hierarchy_checker.adviser.Adviser
 import com.yundin.hierarchy_checker.outputter.RecommendationOutputter
+import java.util.*
 
 class ConcreteHierarchyAnalyzer(
     adviser: Adviser,
@@ -12,6 +15,7 @@ class ConcreteHierarchyAnalyzer(
 ) : HierarchyAnalyzer(adviser, outputter) {
 
     private val hierarchyChangeListener: OnHierarchyChangeListener = HierarchyChangeListener()
+    private val known = hashSetOf<Int>()
 
     override fun analyzeDynamicHierarchy(root: View) {
         proceedView(root)
@@ -24,8 +28,14 @@ class ConcreteHierarchyAnalyzer(
     }
 
     private fun proceedView(view: View) {
-        adviser.findAlternativeAsync(view.javaClass.simpleName) { alternative ->
-            outputter.output(view, alternative)
+        if (view.id == -1) {
+            view.id = ViewCompat.generateViewId()
+        }
+        if (!known.contains(view.id)) {
+            known.add(view.id)
+            adviser.findAlternativeAsync(view.javaClass.simpleName) { alternative ->
+                outputter.output(view, alternative)
+            }
         }
     }
 
